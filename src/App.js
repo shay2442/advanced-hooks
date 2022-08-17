@@ -9,6 +9,7 @@ function App() {
   const city = "Austin";
   const [weather, setWeather] = useState([]);
   const [shows, setShows] = useState([]);
+  const [joke, setJoke] = useState(null);
   // const JokeAPI = require('sv443-joke-api');
 
   const SHOWS_URL = "http://api.tvmaze.com";
@@ -19,37 +20,46 @@ function App() {
   //   .then((shows) => setShows(shows))
   //   // console.log(shows)
 
+  useEffect(() => {
+    if (joke === null) {
+      fetch("https://api.chucknorris.io/jokes/random")
+        .then((r) => r.json())
+        .then((jokeData) => setJoke(jokeData.value));
+    }
+  }, [joke]);
 
-// for (var i = 1; i < 101; i++) {
-//   if (i % 15 == 0) console.log("FizzBuzz");
-//   else if (i % 5 == 0) console.log("Buzz")
-//   else if (i % 3 == 0) console.log("Fizz")
-//   else console.log(i)
-// }
+  function handleJokeClick() {
+    setJoke(null);
+  }
 
-// function multiply(num, num2) {
-//   console.log (num * num2)
+  // for (var i = 1; i < 101; i++) {
+  //   if (i % 15 == 0) console.log("FizzBuzz");
+  //   else if (i % 5 == 0) console.log("Buzz")
+  //   else if (i % 3 == 0) console.log("Fizz")
+  //   else console.log(i)
+  // }
 
-// }
-// multiply(2,3)
+  // function multiply(num, num2) {
+  //   console.log (num * num2)
 
-var arr = [1, 2, 3, 4, 5];
-arr.unshift(-1, 0); // 7
-// console.log(arr); //(7)
+  // }
+  // multiply(2,3)
 
-arr.shift((-1))
-// console.log(arr)
+  var arr = [1, 2, 3, 4, 5];
+  arr.unshift(-1, 0); // 7
+  // console.log(arr); //(7)
 
-var str = "I love Charlie and Bailey.";
-var strSplit = str.split(' ',3);
-// console.log(strSplit);
-// console.log(strSplit);
+  arr.shift(-1);
+  // console.log(arr)
 
+  var str = "I love Charlie and Bailey.";
+  var strSplit = str.split(" ", 3);
+  // console.log(strSplit);
+  // console.log(strSplit);
 
-
-var str = "abcdefg";
-var sliceParam = str.slice(2)
-console.log(sliceParam)
+  var str = "abcdefg";
+  var sliceParam = str.slice(2);
+  // console.log(sliceParam)
 
   async function getShows() {
     console.log("getShows called");
@@ -59,26 +69,26 @@ console.log(sliceParam)
         ul.innerHTML += `
       <li>${show.name}</li>
       `;
-        console.log(data);
+        // console.log(data);
       });
     });
   }
   function alphabetPosition(text) {
     var chari,
-        arr = [],
-        alphabet = "abcdefghijklmnopqrstuvwxyz",
-        i;
+      arr = [],
+      alphabet = "abcdefghijklmnopqrstuvwxyz",
+      i;
 
-    for (var i = 0; i < text.length; i++){
-        chari = text[i].toLowerCase();
-        if (alphabet.indexOf(chari) !== -1){
-            arr.push(alphabet.indexOf(chari));
-        }
+    for (var i = 0; i < text.length; i++) {
+      chari = text[i].toLowerCase();
+      if (alphabet.indexOf(chari) !== -1) {
+        arr.push(alphabet.indexOf(chari));
+      }
     }
     return arr;
-    //new 
-}
-console.log(alphabetPosition("Hello World!!1"));
+    //new
+  }
+  // console.log(alphabetPosition("Hello World!!1"));
 
   async function fetchShows() {
     let res = await fetch(SHOWS_URL + "/shows");
@@ -115,6 +125,10 @@ console.log(alphabetPosition("Hello World!!1"));
     setCurrentPokemonId(currentPokemonId + 1);
   }
   // console.log(weather)
+  // console.log(joke.value)
+  //<PokemonComponent />
+  //<JokeComponent />
+  //<ShowsComponent />
 
   return (
     <div className="App">
@@ -124,6 +138,9 @@ console.log(alphabetPosition("Hello World!!1"));
         return <h1>Pokemon: {pokemon.name}, {pokemon.url}</h1>
       
       })} */}
+      <button onClick={handleJokeClick}>Next Joke</button>
+      {/* <h1>{joke.value}</h1> */}
+      {joke ? <div>{joke}</div> : "No joke yet"}
 
       <h1>{pokemon.name}</h1>
       {pokemon ? <img src={pokemon.sprites.front_default} /> : "No pokemon yet"}
