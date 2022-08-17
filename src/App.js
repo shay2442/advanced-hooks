@@ -74,6 +74,7 @@ console.log(sliceParam)
         }
     }
     return arr;
+    //new 
 }
 console.log(alphabetPosition("Hello World!!1"));
 
