@@ -45,6 +45,8 @@ var strSplit = str.split(' ',3);
 // console.log(strSplit);
 // console.log(strSplit);
 
+
+
 var str = "abcdefg";
 var sliceParam = str.slice(2)
 console.log(sliceParam)
