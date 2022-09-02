@@ -13,12 +13,20 @@ function App() {
   // const JokeAPI = require('sv443-joke-api');
 
   const SHOWS_URL = "http://api.tvmaze.com";
+  
 
   // useEffect(() => {
   //   fetch(SHOWS_URL + '/shows')
   //   .then((r) => r.json())
-  //   .then((shows) => setShows(shows))
-  //   // console.log(shows)
+  //   .then((shows) => setShows(shows))},[])
+    // console.log(shows)
+
+
+   useEffect(() => {
+    fetch('https://api.agify.io?name=matt')
+    .then((r) => r.json())
+    .then((person) => console.log(person))},[])
+   
 
   useEffect(() => {
     if (joke === null) {
@@ -38,6 +46,39 @@ function App() {
   //   else if (i % 3 == 0) console.log("Fizz")
   //   else console.log(i)
   // }
+
+  str = "hey there"
+  function getVowels(str) {
+    return str.split('').filter((l) => "aeiou".includes(l))
+  }
+// console.log(getVowels(str))
+
+arr=[1,2,3,4]
+
+function oddOrEven(arr) {
+  var sum = arr.reduce((x,y) => x+y)
+  // console.log(sum)
+  if(sum % 2 ==0) {
+    return "even"
+  } else {
+    return "odd"
+  }
+}
+
+// console.log(oddOrEven(arr))
+
+
+ var loopArr = []
+for (var i = 0; i < 5; i++){
+  loopArr.push(i)
+}
+// console.log(loopArr)
+
+// var array = [1,2,3,4,5,6,7,8]
+// for (var i = 0; i <array.length ; i++){
+//   console.log(array[i])
+// }
+
 
   // function multiply(num, num2) {
   //   console.log (num * num2)
@@ -129,10 +170,12 @@ function App() {
   //<PokemonComponent />
   //<JokeComponent />
   //<ShowsComponent />
+  // console.log(shows)
 
   return (
     <div className="App">
       <h3>Current Weather: {weather.FeelsLikeF}</h3>
+      <h1>{oddOrEven(arr)}</h1>
       <button onClick={handleClick}>Next Pokemon</button>
       {/* {pokemons.map((pokemon) => {
         return <h1>Pokemon: {pokemon.name}, {pokemon.url}</h1>
